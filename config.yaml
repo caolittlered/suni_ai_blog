@@ -1,0 +1,56 @@
+# Suni AI Blog 配置
+
+# 服务配置
+server:
+  host: "0.0.0.0"
+  port: 3000
+  debug: true
+
+# OpenClaw Gateway
+openclaw:
+  gateway_url: "ws://127.0.0.1:18789"
+  # 如果 gateway 需要认证，填入 token
+  token: ""
+
+# JWT 配置
+jwt:
+  secret: "your-super-secret-key-change-in-production"
+  algorithm: "HS256"
+  expire_hours: 24
+
+# 数据库
+database:
+  url: "sqlite+aiosqlite:///./data/suni.db"
+
+# RAG 配置
+rag:
+  embedding:
+    model: "BAAI/bge-large-zh-v1.5"
+    device: "cpu"
+  
+  reranker:
+    model: "BAAI/bge-reranker-large"
+    device: "cpu"
+  
+  vector_db:
+    persist_directory: "./data/chroma"
+  
+  retrieval:
+    top_k: 10
+    rerank_top_k: 5
+    similarity_threshold: 0.5
+  
+  chunking:
+    chunk_size: 500
+    chunk_overlap: 50
+
+# 知识库存储
+knowledge:
+  upload_dir: "./data/knowledge"
+  allowed_extensions:
+    - ".txt"
+    - ".pdf"
+    - ".docx"
+    - ".xlsx"
+    - ".md"
+  max_file_size_mb: 50
